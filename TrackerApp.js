@@ -1,8 +1,11 @@
-export default class TrackerApp {
+class TrackerApp {
     constructor(selectorString) {
         this.mainBody = document.querySelector(selectorString);
         this.mainBody.innerHTML = TrackerApp.html();
-       
+        this.mainBody.querySelector(".btn-sm").addEventListener("click", ()=>{
+        this.onClickNewEntry();
+
+        });
 
     }
     static html(){
@@ -43,5 +46,12 @@ static tContent(){
    `;
 }
 
+onClickNewEntry(){
+    
+     this.mainBody.querySelector(".new-entry").insertAdjacentHTML("beforeend", TrackerApp.tContent());
 }
- 
+
+
+
+}
+export default TrackerApp;
