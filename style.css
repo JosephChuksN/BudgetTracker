@@ -4,8 +4,20 @@
 .fa{
 color: red!important;
 }
+.rounded{
+  outline: none!important;
+}
+
+.btn-delete{
+  color: red!important;
+}
+.btn-sm{
+  margin-left: 90%!important;
+}
+h4{
+  margin-left: 85%!important;
+}
+
 @media only screen and (max-width: 600px) {
-    body {
-      background-color: lightblue;
-    }
+   
   }
