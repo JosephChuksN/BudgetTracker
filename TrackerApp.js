@@ -27,7 +27,7 @@ class TrackerApp {
           </tr>
         </tbody>
         <tfoot>
-          <td colspan="5"><h4 class="px-1">Total: <span>0.00</span></h4></td>
+          <td colspan="5"><h4 class="px-1">Total: <span class="total">0.00</span></h4></td>
         </tfoot>
     </table>
         `; 
@@ -51,6 +51,7 @@ loadData(){
     for(const entry of detailsEntries){
         this.tRowEntries(entry)
     }
+    this.review();
 }     
 
 rowEntries(){
@@ -70,7 +71,7 @@ save(){
 
       })
    localStorage.setItem("budget-details", JSON.stringify(details))
-
+   this.review();
 }
 
 tRowEntries(entry = {}){
@@ -86,10 +87,23 @@ tRowEntries(entry = {}){
       this.onDeletebtn(e);
       });
       
+     
       tRow.querySelectorAll(".rounded").forEach(input => {
-       input.addEventListener("change", this.save());
-      }); 
+          input.addEventListener("input", this.save());
+      });
 
+}
+
+review(){
+    const total = this.rowEntries().reduce((total, row) =>{
+      const amount = row.querySelector("#amount").value;
+      const ifIncome = row.querySelector("#type").value === "Income";
+      const checker =  ifIncome ? 1 : -1;
+      return total + (amount * checker)
+    }, 0);
+      const totalFigure = this.mainBody.querySelector(".total");
+      totalFigure.textContent = total;
+    
 }
 
 onClickNewEntry(){
@@ -99,7 +113,7 @@ onClickNewEntry(){
 onDeletebtn(e){
     
   e.target.closest("tr").remove();
-
+  this.save();
 }
 
 
