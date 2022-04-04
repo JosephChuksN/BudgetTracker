@@ -65,7 +65,7 @@ save(){
               date: rowData.querySelector("#date").value,
               description: rowData.querySelector("#description").value,
               type: rowData.querySelector("#type").value,
-               amount: rowData.querySelector("#amount").value,
+               amount: parseFloat(rowData.querySelector("#amount").value),
                
           };
 
